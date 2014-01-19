@@ -22,23 +22,39 @@
       android:text="@string/All_Files"
       android:textAlignment='center'
     ></Button>
-  <Button
-    android:gravity='center_vertical|left'
-    android:id='@+id/PDF_Files'
-    android:layout_height='wrap_content'
-    android:layout_width='match_parent'
-    android:text="@string/PDF_Files"
-    android:textAlignment='center'
+    <Button
+      android:gravity='center_vertical|left'
+      android:id="@+id/All_PDF_Files"
+      android:layout_height='wrap_content'
+      android:layout_width='match_parent'
+      android:text="@string/All_Pdf_Files"
+      android:textAlignment='center'
+      ></Button>
+    <Button
+      android:gravity='center_vertical|left'
+      android:id="@+id/Local_PDF_Files"
+      android:layout_height='wrap_content'
+      android:layout_width='match_parent'
+      android:text="@string/Local_Pdf_Files"
+      android:textAlignment='center'
     ></Button>
-  <Button
-    android:gravity='center_vertical|left'
-    android:id='@+id/Calculator_Files'
-    android:layout_height='wrap_content'
-    android:layout_width='match_parent'
-    android:text="@string/Calculator_Files"
-    android:textAlignment='center'
+    <Button
+      android:gravity='center_vertical|left'
+      android:id="@+id/All_Calculator_Files"
+      android:layout_height='wrap_content'
+      android:layout_width='match_parent'
+      android:text="@string/All_Calculator_Files"
+      android:textAlignment='center'
+      ></Button>
+    <Button
+      android:gravity='center_vertical|left'
+      android:id="@+id/Local_Calculator_Files"
+      android:layout_height='wrap_content'
+      android:layout_width='match_parent'
+      android:text="@string/Local_Calculator_Files"
+      android:textAlignment='center'
     ></Button>
-  </LinearLayout>
+   </LinearLayout>
 </ScrollView>
 <!-- vim: set nowrap tabstop=8 shiftwidth=2 softtabstop=2 expandtab textwidth=96 : -->
 <!-- vim: set filetype=xml foldmethod=marker nospell spell spelllang=en_gb : -->

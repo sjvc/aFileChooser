@@ -32,6 +32,7 @@ import android.util.Log;
 import android.webkit.MimeTypeMap;
 
 import com.ianhanniballake.localstorage.LocalStorageProvider;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -65,7 +66,7 @@ public class FileUtils {
 
     public static final String HIDDEN_PREFIX = ".";
 
-   /**
+    /**
     * File Filter that includes only files with the specified extensions to pass
     * @author Kiran Rao
     *
@@ -105,15 +106,117 @@ public class FileUtils {
      }
 
    }
+   /**
+    * <p>start activity</p>
+    *
+    * @param callingActivity activity opening the chooser
+    * @param title title to display in the chooser
+    * @param requestCode request code used to identify the result
+    * @param mimeType set the mime type to limit the files shown in choosers not capable of
+    *                 extension filtering. this might also reduce the amount of
+    *                 choosers presented
+    * @param filterIncludeExtensions file extensions to display
+    */
+   public static void startChooser (
+      final android.app.Activity callingActivity,
+      @NotNull final CharSequence title,
+      final int requestCode,
+      @NotNull final String mimeType,
+      @NotNull final java.util.ArrayList<String> filterIncludeExtensions) {
+      //android.util.Log.d (TAG, "+ startChooser");
+      //android.util.Log.v (TAG, "> callingActivity         = " + callingActivity);
+      //android.util.Log.v (TAG, "> requestCode             = " + requestCode);
+      //android.util.Log.v (TAG, "> filterIncludeExtensions = " + filterIncludeExtensions);
+
+      // Use the GET_CONTENT intent from the utility class
+      final Intent target = FileUtils.createGetContentIntent();
+
+      target.putStringArrayListExtra (
+         com.ipaulpro.afilechooser.FileChooserActivity.EXTRA_FILTER_INCLUDE_EXTENSIONS,
+         filterIncludeExtensions);
+      target.setType (mimeType);
+
+      android.util.Log.v (TAG, "target intent  >" + target);
+
+      // Create the chooser Intent
+      final Intent intent = Intent.createChooser(target, title);
+
+      android.util.Log.v (TAG, "chooser intent >" + target);
+
+      try {
+         callingActivity.startActivityForResult (intent, requestCode);
+      } catch (@NotNull final android.content.ActivityNotFoundException e) {
+         // The reason for the existence of aFileChooser
+         android.util.Log.e (TAG, "LOG02230:", e);
+      }
+
+
+      //android.util.Log.d (TAG, "- startChooser");
+      return;
+   } // startChooser
+
+   /**
+    * <p>start activity</p>
+    *
+    * @param callingActivity activity opening the chooser
+    * @param title title to display in the chooser
+    * @param requestCode request code used to identify the result
+    * @param mimeType set the mime type to limit the files shown in choosers not capable of
+    *                 extension filtering. this might also reduce the amount of
+    *                 choosers presented
+    * @param baseDirectory base directory to show
+    * @param filterIncludeExtensions file extensions to display
+    */
+   public static void startChooser (
+      final android.app.Activity callingActivity,
+      @NotNull final CharSequence title,
+      final int requestCode,
+      @NotNull final String mimeType,
+      final String baseDirectory,
+      final java.util.ArrayList<String> filterIncludeExtensions) {
+      //android.util.Log.d (TAG, "+ startChooser");
+      //android.util.Log.v (TAG, "> callingActivity         = " + callingActivity);
+      //android.util.Log.v (TAG, "> requestCode             = " + requestCode);
+      //android.util.Log.v (TAG, "> baseDirectory           = " + baseDirectory);
+      //android.util.Log.v (TAG, "> filterIncludeExtensions = " + filterIncludeExtensions);
+
+      // Use the GET_CONTENT intent from the utility class
+      final Intent target = FileUtils.createGetContentIntent();
+
+      target.putStringArrayListExtra (
+         com.ipaulpro.afilechooser.FileChooserActivity.EXTRA_FILTER_INCLUDE_EXTENSIONS,
+         filterIncludeExtensions);
+      target.putExtra (
+         com.ipaulpro.afilechooser.FileChooserActivity.EXTRA_FILTER_BASE_PATH,
+         baseDirectory);
+      target.setType (FileUtils.MIME_TYPE_APP);
+
+      android.util.Log.v (TAG, "target intent  >" + target);
+
+      // Create the chooser Intent
+      final Intent intent = Intent.createChooser(target, title);
+
+      android.util.Log.v (TAG, "chooser intent >" + target);
+
+      try {
+         callingActivity.startActivityForResult (intent, requestCode);
+      } catch (@NotNull final android.content.ActivityNotFoundException e) {
+         // The reason for the existence of aFileChooser
+         android.util.Log.e (TAG, "LOG02230:", e);
+      }
+      //android.util.Log.d (TAG, "- startChooser");
+      return;
+   } // startChooser
 
     /**
+     *
      * Gets the extension of a file name, like ".png" or ".jpg".
      *
      * @param uri
      * @return Extension including the dot("."); "" if there is no extension;
      *         null if uri was null.
      */
-    @Nullable
+    @Contract (value = "null -> null; !null -> !null", pure = true)
     public static String getExtension(@Nullable final String uri) {
         if (uri == null) {
             return null;
@@ -131,6 +234,7 @@ public class FileUtils {
     /**
      * @return Whether the URI is a local one.
      */
+    @Contract (value = "null -> false", pure = true)
     public static boolean isLocal(@Nullable final String url) {
         if (url != null && !url.startsWith("http://") && !url.startsWith("https://")) {
             return true;
@@ -152,7 +256,6 @@ public class FileUtils {
      * @param file
      * @return uri
      */
-    @Nullable
     public static Uri getUri(@Nullable final File file) {
         if (file != null) {
             return Uri.fromFile(file);

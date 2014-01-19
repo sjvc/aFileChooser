@@ -15,9 +15,11 @@
  * limitations under the License.
  -->
 <resources>
-  <string name="app_name">aFileChooserExample</string>
+  <string name="All_Calculator_Files">Choose from all calculator files…</string>
+  <string name="All_Files">Choose from all files…</string>
+  <string name="All_Pdf_Files">Choose from all PDF files…</string>
+  <string name="app_name">aFileChooser Example</string>
   <string name="chooser_title">Lorem ipsum</string>
-  <string name = "All_Files">Choose from all files…</string>
-  <string name = "PDF_Files">Choose pdf files…</string>
-  <string name = "Calculator_Files">Choose calculator files…</string>
+  <string name="Local_Calculator_Files">Choose from local calculator files…</string>
+  <string name="Local_Pdf_Files">Choose from local pdf files…</string>
 </resources>

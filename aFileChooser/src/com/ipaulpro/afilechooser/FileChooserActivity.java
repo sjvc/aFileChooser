@@ -59,7 +59,7 @@ public class FileChooserActivity extends FragmentActivity implements
     public static final String SAVE_INSTANCE_PATH = "path";
     public static final String EXTRA_FILTER_INCLUDE_EXTENSIONS =
        "com.ipaulpro.afilechooser.EXTRA_FILTER_INCLUDE_EXTENSIONS";
-   public static final String EXTRA_FILTER_BASE_PATH =
+    public static final String EXTRA_FILTER_BASE_PATH =
       "com.ipaulpro.afilechooser.EXTRA_FILTER_BASE_PATH";
     public static final String EXTERNAL_BASE_PATH = Environment
             .getExternalStorageDirectory().getAbsolutePath();
@@ -237,11 +237,13 @@ public class FileChooserActivity extends FragmentActivity implements
     public boolean onCreateOptionsMenu(final Menu menu) {
         if (HAS_ACTIONBAR) {
             final boolean hasBackStack = mFragmentManager.getBackStackEntryCount() > 0;
-            final ActionBar actionBar = getActionBar();
+            @Nullable final ActionBar actionBar = getActionBar();
 
-            actionBar.setDisplayHomeAsUpEnabled(hasBackStack);
-            actionBar.setHomeButtonEnabled(hasBackStack);
-        }
+           if (actionBar != null) {
+              actionBar.setDisplayHomeAsUpEnabled(hasBackStack);
+              actionBar.setHomeButtonEnabled(hasBackStack);
+           } // if
+        } // if
 
         return true;
     }
