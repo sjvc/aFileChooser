@@ -17,8 +17,6 @@
 package com.ipaulpro.afilechooser;
 
 import android.annotation.SuppressLint;
-
-import android.app.ActionBar;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -27,14 +25,16 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentManager.BackStackEntry;
 import android.support.v4.app.FragmentManager.OnBackStackChangedListener;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -48,7 +48,7 @@ import java.util.ArrayList;
  * @author paulburke (ipaulpro)
  */
 @SuppressWarnings ("CollectionDeclaredAsConcreteClass")
-public class FileChooserActivity extends FragmentActivity implements
+public class FileChooserActivity extends ActionBarActivity implements
         OnBackStackChangedListener, FileListFragment.Callbacks {
 
     /**
@@ -237,7 +237,7 @@ public class FileChooserActivity extends FragmentActivity implements
     public boolean onCreateOptionsMenu(final Menu menu) {
         if (HAS_ACTIONBAR) {
             final boolean hasBackStack = mFragmentManager.getBackStackEntryCount() > 0;
-            final ActionBar actionBar = getActionBar();
+            final ActionBar actionBar = getSupportActionBar();
 
             actionBar.setDisplayHomeAsUpEnabled(hasBackStack);
             actionBar.setHomeButtonEnabled(hasBackStack);
